@@ -1,6 +1,6 @@
 # Ex.No: 4   Implementation of Alpha Beta Pruning 
-### DATE:                                                                            
-### REGISTER NUMBER : 
+### DATE: 18/5/2024                                                                       
+### REGISTER NUMBER : 212221060030
 ### AIM: 
 Write a Alpha beta pruning algorithm to find the optimal value of MAX Player from the given graph.
 ### Steps:
@@ -15,18 +15,44 @@ Write a Alpha beta pruning algorithm to find the optimal value of MAX Player fro
 9.  Stop the program. 
 
 ### Program:
+~~~python
+MAX, MIN = 1000, -1000 
+ 
+def minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta):
+    if depth == 3: 
+        return values[nodeIndex] 
+ 
+    if maximizingPlayer:
+        best = MIN 
+        for i in range(0, 2):
+            val = minimax(depth + 1, nodeIndex * 2 + i, False, values, alpha, beta) 
+            best = max(best, val) 
+            alpha = max(alpha, best)
+ 
+            if beta <= alpha: 
+                break 
+ 
+        return best
+    else:
+        best = MAX 
+  
+        for i in range(0, 2):
+            val = minimax(depth + 1, nodeIndex * 2 + i, True, values, alpha, beta) 
+            best = min(best, val) 
+            beta = min(beta, best)
+ 
+            if beta <= alpha:
+                break 
+ 
+    return best 
 
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    values = [3, 5, 6, 9, 1, 2, 0, -1]
+    print("The optimal value is :", minimax(0, 0, True, values, MIN, MAX))
+~~~
 
 ### Output:
+![image](https://github.com/santhosh15f/AI_Lab_2023-24/assets/150273305/2501f70b-1c66-4360-849c-459f0f5e117a)
 
 
 
